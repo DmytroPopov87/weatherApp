@@ -1,7 +1,7 @@
 //data fetch
 
 //weather api/ 50 requests per day on trial
-const api = '1xctgGb5YqDg1wWcPvIuY4LGt1inT9c5';
+const api = 'Rh4Gcs9GUDikN7ub1n7KZMNrKAcrxaAF';
 
 
 const getCity = async (city) => {
