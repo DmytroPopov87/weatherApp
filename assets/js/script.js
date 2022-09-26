@@ -55,6 +55,7 @@ const updateUI = (data) => {
 //     //returning object
 //     //object short hand notation
 //     return { cityDets, weather };
+
 // }
 
 cityForm.addEventListener('submit', e => {
