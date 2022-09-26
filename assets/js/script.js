@@ -8,6 +8,8 @@ const details = document.querySelector('.details');
 const time = document.querySelector('img.time');
 const icon = document.querySelector('.icon img');
 
+const forecast = new Forecast();
+
 
 //update ui is responsible for dynamicaly updating page info
 const updateUI = (data) => {
@@ -44,28 +46,39 @@ const updateUI = (data) => {
     }
 };
 
-const updateCity = async (city) => {
-    //store city object about the city
-    const cityDets = await getCity(city);
-    //value from cityDets call
-    const weather = await getWeather(cityDets.Key);
-    //returning object
-    //object short hand notation
-    return { cityDets, weather };
 
-}
+// const updateCity = async (city) => {
+//     //store city object about the city
+//     const cityDets = await getCity(city);
+//     //value from cityDets call
+//     const weather = await getWeather(cityDets.Key);
+//     //returning object
+//     //object short hand notation
+//     return { cityDets, weather };
+// }
 
 cityForm.addEventListener('submit', e => {
     //prevent refreshing page
     e.preventDefault();
     // getting city value from input
     const city = cityForm.city.value.trim();
+
     cityForm.reset();
     // update ui with new city
     //update async/await and returns promise now
     //output updated datat to DOM
-    updateCity(city)
+    forecast.updateCity(city)
         .then(data  => updateUI(data) )
         .catch(err => console.log(err));
-    
+
+    //set local storage
+    localStorage.setItem('city', city);
 });
+
+//on app starts // page refresh etc.
+//check for true or false value
+if(localStorage.getItem('city')) {
+    forecast.updateCity(localStorage.getItem('city'))
+        .then(data => updateUI(data))
+        .catch(err => console.log(err));
+}
